@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <time.h>
 #include "matrix_operations.h"
 
 int main() {
     setlocale(LC_ALL, "Russian");
+    srand((unsigned int)time(NULL));
+
     int n;
 
     printf("Введите размер матрицы N: ");
@@ -12,15 +15,14 @@ int main() {
 
     int** matrix = create_matrix(n);
 
-    printf("Введите элементы матрицы %dx%d:\n", n, n);
+    printf("Заполняем матрицу %dx%d случайными значениями...\n", n, n);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("matrix[%d][%d] = ", i, j);
-            scanf_s("%d", &matrix[i][j]);
+            matrix[i][j] = rand() % 100 + 1;
         }
     }
 
-    printf("\nВведенная матрица:\n");
+    printf("\nСгенерированная матрица:\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%4d", matrix[i][j]);
